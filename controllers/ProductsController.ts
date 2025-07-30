@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Product from '../models/Product';
+import { ObjectId } from 'mongodb';
 
 export default class ProductsController {
   constructor() {}
@@ -8,6 +9,13 @@ export default class ProductsController {
     const products = await Product.getProducts();
     console.log(products);
     res.render('products/all', { products });
+  }
+
+  static async showProduct(req: Request, res: Response) {
+    const id = new ObjectId(req.params.id);
+    const product = await Product.getProductById(id);
+    console.log(product);
+    res.render('products/product', { product });
   }
 
   static createProduct(req: Request, res: Response) {
