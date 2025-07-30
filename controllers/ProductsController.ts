@@ -4,8 +4,10 @@ import Product from '../models/Product';
 export default class ProductsController {
   constructor() {}
 
-  static showProducts(req: Request, res: Response) {
-    res.render('products/all');
+  static async showProducts(req: Request, res: Response) {
+    const products = await Product.getProducts();
+    console.log(products);
+    res.render('products/all', { products });
   }
 
   static createProduct(req: Request, res: Response) {
@@ -13,9 +15,8 @@ export default class ProductsController {
   }
 
   static createProductSave(req: Request, res: Response) {
-    const { name, price, description } = req.body;
-    console.log(name, price, description);
-    const product = new Product(name, price, description);
+    const { name, image, price, description } = req.body;
+    const product = new Product(name, price, image, description);
     product.save();
     res.render('products/all');
   }
