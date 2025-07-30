@@ -33,4 +33,19 @@ export default class ProductsController {
     product.save();
     res.redirect('/products');
   }
+
+  static async editProduct(req: Request, res: Response) {
+    const id = new ObjectId(req.params.id);
+    const product = await Product.getProductById(id);
+    console.log(product);
+    res.render('products/edit', { product });
+  }
+
+  static async editProductSave(req: Request, res: Response) {
+    const _id = new ObjectId(req.body._id);
+    const { name, image, price, description } = req.body;
+    const product = new Product(name, price, image, description);
+    await product.editProduct(_id);
+    res.redirect(`/products`);
+  }
 }

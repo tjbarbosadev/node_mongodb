@@ -38,4 +38,13 @@ export default class Product {
       console.log(`Product ${_id} doesn't exists`, err);
     }
   }
+
+  async editProduct(_id: ObjectId) {
+    try {
+      await conn.db().collection('products').updateOne({ _id }, { $set: this });
+      console.log('Updated successfully!', this);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
