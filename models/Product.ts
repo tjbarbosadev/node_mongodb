@@ -29,4 +29,13 @@ export default class Product {
     const product = await conn.db().collection('products').findOne({ _id });
     return product;
   }
+
+  static async deleteProduct(_id: ObjectId) {
+    try {
+      await conn.db().collection('products').deleteOne({ _id });
+      console.log(`Product ${_id} deleted!`);
+    } catch (err) {
+      console.log(`Product ${_id} doesn't exists`, err);
+    }
+  }
 }
