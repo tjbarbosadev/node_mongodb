@@ -1,0 +1,19 @@
+<h1>Create product</h1>
+<form action="/products/create" method="post">
+  <div class="form-control">
+    <label for="name">Product name</label>
+    <input type="text" name="name" placeholder="Input product name" />
+  </div>
+  <div class="form-control">
+    <label for="price">Product price</label>
+    <input type="number" name="price" placeholder="Input product price" />
+  </div>
+  <div class="form-control">
+    <label for="description">Product description</label>
+    <textarea
+      name="description"
+      placeholder="Input product description"
+    ></textarea>
+  </div>
+  <input type="submit" class="btn" value="Submit" />
+</form>
